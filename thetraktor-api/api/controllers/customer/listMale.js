@@ -3,7 +3,7 @@ import customerDAO from '../../models/customer/dao.js';
 const list = async (req, res) => {
     try {
 
-        const customers = await customerDAO.listInactive();
+        const customers = await customerDAO.listMale(req.params.top);
 
         if (req.query['count'] == 'true') {
             if (req.query['packs'] == 'true') {

@@ -36,5 +36,24 @@ export class Customer {
       locked: boolean;
     }
   ];
+  marks?:[
+    {
+      _id:string,
+      plan:{
+        _id: string;
+        name: string;
+        icon: string;
+        expanded: boolean;
+        options: [
+          {
+            _id: string;
+            option: string;
+          }
+        ]
+      },
+      date:Date;
+      mark:number;
+    }
+  ]
   packList?: string;
 }

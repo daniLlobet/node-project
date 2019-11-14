@@ -20,6 +20,15 @@ listActive(){
 listInactive(){
     return Customer.find({"isActive":false}).populate('plan').populate('packs').exec();
 }
+listMixed(top){
+    return Customer.find({"isActive":true}).limit(parseInt(top)).populate('plan').populate('packs').exec();
+}
+listMale(top){
+    return Customer.find({"isActive":true,"gender":'male'}).limit(parseInt(top)).populate('plan').populate('packs').exec();
+}
+listFemale(top){
+    return Customer.find({"isActive":true,"gender":'female'}).limit(parseInt(top)).populate('plan').populate('packs').exec();
+}
 listPlan(plan_id){
     return Customer.find({"plan":{$in:plan_id}}).populate('plan').populate('packs').exec();
 }
