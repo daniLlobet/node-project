@@ -19,7 +19,12 @@ const customerSchema = new Schema({
   registered: { type: Date, default: Date.now },
   plan: { type: Schema.ObjectId, ref: 'Plan' },
   packs: [{ type: Schema.ObjectId, ref: 'Pack' }],
-  packList: String
+  packList: String,
+  marks:[{
+    plan: { type: Schema.ObjectId, ref: 'Plan' },
+    mark: Number,
+    date:{ type: Date, default: Date.now }
+  }]
 });
 //const Pack = mongoose.model('Pack', PackSchema);
 

@@ -33,8 +33,7 @@ listPlan(plan_id){
     return Customer.find({"plan":{$in:plan_id}}).populate('plan').populate('packs').exec();
 }
 
-listOne(id){
-    
+listOne(id){    
     return Customer.findById(id).populate('plan').populate('packs').exec();
 }
 update(id,data){
