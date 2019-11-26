@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const Schema = mongoose.Schema;
 
@@ -16,12 +17,14 @@ const customerSchema = new Schema({
   email: String,
   phone: Number,
   address: String,
+  language: String,
+  password: String,
   registered: { type: Date, default: Date.now },
   plan: { type: Schema.ObjectId, ref: 'Plan' },
   packs: [{ type: Schema.ObjectId, ref: 'Pack' }],
   packList: String,
   marks:[{
-    plan: { type: Schema.ObjectId, ref: 'Plan' },
+    plan:{ type: Schema.ObjectId, ref: 'Plan' },
     mark: Number,
     date:{ type: Date, default: Date.now }
   }]
@@ -40,16 +43,25 @@ customerSchema.pre('save', async function (next) {
   this.gender = await this.gender.toLowerCase();
   var oldName = this.name.first;
   if (this.isModified('name')) {
-    this.name.first = await oldName.toUpperCase();
+    //this.name.first = await oldName.toUpperCase();
     console.log("%s has changed their name to %s", oldName, this.name.first);
   }
   next();
 });
+customerSchema.pre('save', async function (next) {
+  try {
+    this.password = await bcrypt.hash(this.password, 10);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+});
+
 // HOOK per posar en majuscules el nom al actualitzar
 customerSchema.pre('findOneAndUpdate', async function (next) {
   if (this._update.name != undefined) {
     var oldName = this._update.name.first;
-    this._update.name.first = await oldName.toUpperCase();
+    //this._update.name.first = await oldName.toUpperCase();
     console.log("%s has changed their name to %s", oldName, this._update.name.first);
   }
   next();

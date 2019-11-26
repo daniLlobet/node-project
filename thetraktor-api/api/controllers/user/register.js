@@ -1,4 +1,4 @@
-import userDAO from '../../models/user/dao.js';
+import customerDAO from '../../models/customer/dao.js';
 
 import HTTPerror from 'http-errors';
 
@@ -10,7 +10,7 @@ const register = async (req, res, next) => {
 
         } else {
 
-            const user = await userDAO.create(Object.assign({},req.body));    
+            const user = await customerDAO.create(Object.assign({},req.body));    
 
             res.send(user);
             

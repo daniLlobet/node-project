@@ -7,7 +7,7 @@ import BearerStrategy from 'passport-http-bearer';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-import userDAO from '../models/user/dao.js';
+import userDAO from '../models/customer/dao.js';
 //import config from '../config/config.js';
 
 const generateAccessToken = (user) => {

@@ -13,7 +13,11 @@ create(data){
 
     return customer.save();
 }
-
+checkUser(data){
+    
+    return Customer.findOne(data)
+    .exec(); 
+}
 listActive(){
     return Customer.find({"isActive":true}).populate('plan').populate('packs').exec();
 }
