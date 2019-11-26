@@ -40,7 +40,8 @@ customerSchema.post('findOneAndRemove', { document: true }, (doc) => {
 // HOOK per posar en majuscules el nom al guardar
 customerSchema.pre('save', async function (next) {
   //console.log('this.name.first', this.name.first);
-  this.gender = await this.gender.toLowerCase();
+  if (this.gender){
+  this.gender = await this.gender.toLowerCase();}
   var oldName = this.name.first;
   if (this.isModified('name')) {
     //this.name.first = await oldName.toUpperCase();
